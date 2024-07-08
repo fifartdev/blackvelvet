@@ -6,7 +6,15 @@ const queryClient = new QueryClient()
 export default function rootLayout(){
     return (
         <QueryClientProvider client={queryClient}>
-            <Stack>
+            <Stack screenOptions={{
+                headerStyle:{
+                backgroundColor: '#000',
+            },
+            headerTintColor: '#E1057A',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}>
                 <Stack.Screen name="index" options={{title:'Black Velvet'}}/>
                 <Stack.Screen name="[id]" pathname="/posts/[id]" />
             </Stack>

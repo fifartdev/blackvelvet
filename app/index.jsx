@@ -4,6 +4,7 @@ import { fetchPosts, stripHtmlAndDecode } from '../api/services'
 import { useQuery } from '@tanstack/react-query'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
+import Separator from '../components/Separator'
 
 const Home = () => {
 
@@ -17,7 +18,7 @@ const Home = () => {
     if(query.isFetching){
       return (
         <SafeAreaView>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color="#E1057A" />
         </SafeAreaView>
       )
     }
@@ -38,7 +39,7 @@ const Home = () => {
          </View>
         </TouchableOpacity>
        )}
-       
+       ItemSeparatorComponent={<Separator/>}
       />
     </View>
   )
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   post: {
-    marginBottom: 16,
+    marginBottom: 12,
+    marginTop: 10,
     padding: 8,
     borderColor: '#ddd'
   },
