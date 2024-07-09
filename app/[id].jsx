@@ -1,10 +1,11 @@
-import { View, Text, SafeAreaView, StyleSheet, ActivityIndicator, ScrollView, Image } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, ActivityIndicator, ScrollView, Image, Share, Alert } from 'react-native'
 import React from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
 import { fetchPost, stripHtmlAndDecode } from '../api/services'
 import {Stack} from 'expo-router'
 import Animated, { FadeIn, FadeOut, Easing} from 'react-native-reanimated';
+import ShareIcon from '../components/ShareIcon'
 
 
 const postId = () => {
@@ -14,6 +15,29 @@ const postId = () => {
     queryKey: ['post'],
     queryFn: ()=>fetchPost(id)
   })
+
+  const shareURL = async (message,url) => {
+    try {
+      const result = await Share.share({
+        message: message,
+        url: url,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          
+        } else {
+          
+        }
+      } else if (result.action === Share.dismissedAction) {
+        
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
+
+
 
     if(query.isLoading){
       return (
@@ -25,7 +49,7 @@ const postId = () => {
 
   return (
       <SafeAreaView>                       
-        <Stack.Screen options={{headerTitle: query?.isFetching ? "Περιμένετε..." : query?.data.title.rendered}} />
+        <Stack.Screen options={{headerTitle: query?.isFetching ? "Περιμένετε..." : query?.data.title.rendered, headerRight:() => <ShareIcon onPress={()=> shareURL(stripHtmlAndDecode(query?.data.title.rendered), query?.data.link)}/>, headerBackTitle: 'Πίσω' }} />
         <Animated.View entering={FadeIn.duration(800).easing(Easing.ease)} exiting={FadeOut}>
           <ScrollView style={styles.post}>
             <Image style={{flex:1, width:'100%', height: 200, backgroundColor: '#c3c3c3'}} contentFit="cover" transition={1000} source={{uri:query?.data.yoast_head_json.og_image[0].url}}/>
@@ -45,11 +69,12 @@ const postId = () => {
     },
     post: {
       marginBottom: 16,
-      padding: 8,
+      padding: 10,
       borderColor: '#ddd'
     },
     postTitle: {
-      fontWeight: '900'
+      fontWeight: '900',
+      marginVertical: 8
     }
   })
 

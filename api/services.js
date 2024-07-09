@@ -8,7 +8,7 @@ const fetchPosts = async () => {
     const res = await axios.get(postUrl, {
       params: {
         categories: process.env.EXPO_PUBLIC_CATEGORY_ID,
-        per_page: 40,
+        per_page: process.env.EXPO_PUBLIC_ITEMS_PP,
       },
     });
     return res.data;

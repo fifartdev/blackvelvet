@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "blackvelvet",
+    "name": "Black Velvet",
     "slug": "blackvelvet",
     "scheme": "blackvelvet",
     "version": "1.0.0",
@@ -16,6 +16,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.fifartapp.blackvelvet",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -26,6 +28,14 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a7bc9b37-6c11-433d-88f0-49c87ce3c508"
+      }
+    }
   }
 }
