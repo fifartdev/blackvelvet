@@ -16,11 +16,10 @@ const postId = () => {
     queryFn: ()=>fetchPost(id)
   })
 
-  const shareURL = async (message,url) => {
+  const shareURL = async (message) => {
     try {
       const result = await Share.share({
         message: message,
-        url: url,
       });
 
       if (result.action === Share.sharedAction) {
@@ -49,7 +48,7 @@ const postId = () => {
 
   return (
       <SafeAreaView>                       
-        <Stack.Screen options={{headerTitle: query?.isFetching ? "Περιμένετε..." : query?.data.title.rendered, headerRight:() => <ShareIcon onPress={()=> shareURL(stripHtmlAndDecode(query?.data.title.rendered), query?.data.link)}/>, headerBackTitle: 'Πίσω' }} />
+        <Stack.Screen options={{headerTitle: query?.isFetching ? "Περιμένετε..." : query?.data.title.rendered, headerRight:() => <ShareIcon onPress={()=> shareURL(query?.data.link)}/>, headerBackTitle: 'Πίσω' }} />
         <Animated.View entering={FadeIn.duration(800).easing(Easing.ease)} exiting={FadeOut}>
           <ScrollView style={styles.post}>
             <Image style={{flex:1, width:'100%', height: 200, backgroundColor: '#c3c3c3'}} contentFit="cover" transition={1000} source={{uri:query?.data.yoast_head_json.og_image[0].url}}/>
