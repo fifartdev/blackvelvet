@@ -36,7 +36,7 @@ const postId = () => {
     }
   };
 
-
+    //console.log('uri id is: ', id);
 
     if(query.isLoading){
       return (
@@ -53,7 +53,7 @@ const postId = () => {
           <ScrollView style={styles.post}>
             <Image style={{flex:1, width:'100%', height: 200, backgroundColor: '#c3c3c3'}} contentFit="cover" transition={1000} source={{uri:query?.data.yoast_head_json.og_image[0].url}}/>
              <Text style={styles.postTitle}>{stripHtmlAndDecode(query?.data.title.rendered)}</Text>
-             <Text>{stripHtmlAndDecode(query?.data.content.rendered)}</Text>
+             <Text style={styles.postContent}>{stripHtmlAndDecode(query?.data.content.rendered)}</Text>
            </ScrollView>
           </Animated.View> 
       </SafeAreaView>
@@ -69,11 +69,15 @@ const postId = () => {
     post: {
       marginBottom: 16,
       padding: 10,
-      borderColor: '#ddd'
+      borderColor: '#ddd',
     },
     postTitle: {
       fontWeight: '900',
-      marginVertical: 8
+      marginVertical: 8,
+      fontSize: 28
+    },
+    postContent: {
+      fontSize: 20
     }
   })
 

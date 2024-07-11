@@ -4,6 +4,8 @@ import { Stack } from "expo-router";
 const queryClient = new QueryClient()
 
 export default function rootLayout(){
+
+
     return (
         <QueryClientProvider client={queryClient}>
             <Stack screenOptions={{
@@ -13,10 +15,11 @@ export default function rootLayout(){
             headerTintColor: '#E1057A',
             headerTitleStyle: {
                 fontWeight: 'bold',
+                fontSize: 26
               },
             }}>
                 <Stack.Screen name="index" options={{title:'Black Velvet'}}/>
-                <Stack.Screen name="[id]" pathname="/posts/[id]" />
+                <Stack.Screen name="[id]" pathname="/[id]" />
             </Stack>
         </QueryClientProvider>
     )
