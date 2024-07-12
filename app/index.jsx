@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { fetchPosts, stripHtmlAndDecode } from '../api/services'
 import { useQuery } from '@tanstack/react-query'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useRouter } from 'expo-router'
+import { useRouter, Stack } from 'expo-router'
 import Separator from '../components/Separator'
+import HeartIcon from '../components/HeartIcon'
 
 const Home = () => {
 
@@ -32,6 +33,7 @@ const Home = () => {
     
     return (
     <View>
+      <Stack.Screen options={{ headerRight:() =>  <HeartIcon onPress={()=> router.push('/favorites')}/> }} />
       <FlatList 
        data={query.data}
        keyExtractor={(item) => item.id}

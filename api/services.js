@@ -21,12 +21,7 @@ const fetchPost = async (id) => {
   const postUrl = `${process.env.EXPO_PUBLIC_API_URL}/wp-json/wp/v2/posts/${id}`;
 
   try {
-    const res = await axios.get(postUrl, {
-      params: {
-        categories: 3016,
-        per_page: 100,
-      },
-    });
+    const res = await axios.get(postUrl);
     return res.data;
   } catch (error) {
     console.log("Error on fetchings", error.message);
