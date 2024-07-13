@@ -1,23 +1,35 @@
 import { View, Text, ActivityIndicator, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { fetchPosts, stripHtmlAndDecode } from '../api/services'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter, Stack } from 'expo-router'
 import Separator from '../components/Separator'
 import HeartIcon from '../components/HeartIcon'
+import RefreshIcon from '../components/RefreshIcon'
 
 const Home = () => {
 
   const date = (d) => { return new Date(d).toLocaleDateString()}
 
   const router = useRouter()
-
+  const queryClient = useQueryClient()
   
 
   const query = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts
+  })
+
+  const fetchAllPosts = useMutation({
+    mutationFn: fetchPosts,
+    onSuccess: () => {
+      //console.log('Mutation run succesfully!');
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
+    },
+    onError: (error) => {
+      console.error(error.message)
+    }
   })
 
     if(query.isFetching){
@@ -27,13 +39,20 @@ const Home = () => {
         </SafeAreaView>
       )
     }
+    if(query.isError){
+      return (
+        <SafeAreaView>
+                  <Text>Σφάλμα. Δεν υπάρχουν αποτελέσματα.Ίσως βρίσκεστε εκτός σύνδεσης</Text>
+        </SafeAreaView>
+      )
+    }
     const navigateToThePost = (id)=>{
       router.push(`/${id}`)
     }
     
     return (
     <View>
-      <Stack.Screen options={{ headerRight:() =>  <HeartIcon onPress={()=> router.push('/favorites')}/> }} />
+      <Stack.Screen options={{ headerLeft:()=><RefreshIcon onPress={()=>fetchAllPosts.mutateAsync()}/>, headerRight:() =>  <HeartIcon onPress={()=> router.push('/favorites')}/> }} />
       <FlatList 
        data={query.data}
        keyExtractor={(item) => item.id}

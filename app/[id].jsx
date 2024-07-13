@@ -99,7 +99,7 @@ const shareURL = async (message) => {
     if(query.isError){
       return (
         <SafeAreaView>
-          <Text>Σφάλμα. Δεν υπάρχουν αποτελέσματα.</Text>
+        <Text>Σφάλμα. Δεν υπάρχουν αποτελέσματα.Ίσως βρίσκεστε εκτός σύνδεσης</Text>
         </SafeAreaView>
       );
     }

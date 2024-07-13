@@ -23,7 +23,7 @@ export default function rootLayout(){
               },
             }}>
                 <Stack.Screen name="index" options={{title:'Black Velvet'}}/>
-                <Stack.Screen name="[id]" pathname="/[id]" options={{headerTitle:()=><HomeIcon onPress={()=>router.back()}/>}}/>
+                <Stack.Screen name="[id]" pathname="/[id]" options={{headerTitle:()=><HomeIcon onPress={()=>router.replace('/')}/>}}/>
                 <Stack.Screen name="favorites" pathname="/favorites" options={{headerTitle:'Αγαπημένα'}} />    
             </Stack>
         </QueryClientProvider>
