@@ -21,6 +21,7 @@ export default function rootLayout(){
                 fontWeight: 'bold',
                 fontSize: 26
               },
+              headerTitleAlign:'center'
             }}>
                 <Stack.Screen name="index" options={{title:'Black Velvet'}}/>
                 <Stack.Screen name="[id]" pathname="/[id]" options={{headerTitle:()=><HomeIcon onPress={()=>router.replace('/')}/>}}/>
