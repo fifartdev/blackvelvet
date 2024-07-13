@@ -12,7 +12,6 @@ import HeartIcon from '../components/HeartIcon'
 import HeartOutlinedIcon from '../components/HeartOutlinedIcon'
 
 
-
 const postId = () => {
 
   const router = useRouter()
