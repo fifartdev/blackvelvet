@@ -96,9 +96,17 @@ const shareURL = async (message) => {
       )
     }
 
+    if(query.isError){
+      return (
+        <SafeAreaView>
+          <Text>Σφάλμα. Δεν υπάρχουν αποτελέσματα.</Text>
+        </SafeAreaView>
+      );
+    }
+
   return (
       <SafeAreaView>                       
-        <Stack.Screen options={{headerTitle: ()=><HomeIcon onPress={()=>router.back()}/>, headerRight:() =>  <ShareIcon onPress={()=> shareURL(query?.data.link)}/>, headerBackTitle: 'Πίσω' }} />
+        <Stack.Screen options={{headerRight:() =>  <ShareIcon onPress={()=> shareURL(query?.data.link)}/>, headerBackTitle: 'Πίσω' }} />
         <Animated.View entering={FadeIn.duration(800).easing(Easing.ease)} exiting={FadeOut}>
           <ScrollView style={styles.post}>
             <Image style={{flex:1, width:'100%', height: 200, backgroundColor: '#c3c3c3'}} contentFit="cover" transition={1000} source={{uri:query?.data.yoast_head_json.og_image[0].url}}/>

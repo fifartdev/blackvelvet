@@ -74,7 +74,7 @@ const handleRemoveAllPostIds= async () => {
     ]);
 // HERE END THE REMOVE FAV MUTATION
 
-  console.log(integerPostIds);
+  //console.log(integerPostIds);
 
   if (postQueries.some((query) => query.isLoading)) {
     return (
@@ -94,7 +94,7 @@ const handleRemoveAllPostIds= async () => {
 
   return (
     <View>
-      <Stack.Screen options={{headerTitle:'Αγαπημένα', headerRight:()=><TrashIcon onPress={()=>alertOnRemove()}/>}} />
+      <Stack.Screen options={{headerRight:()=><TrashIcon onPress={()=>alertOnRemove()}/>}} />
       <FlatList 
         data={postQueries}
         keyExtractor={(item) => item.data?.id?.toString() || Math.random().toString()}
