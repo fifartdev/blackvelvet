@@ -41,8 +41,10 @@ const Home = () => {
     }
     if(query.isError){
       return (
-        <SafeAreaView>
-                  <Text>Σφάλμα. Δεν υπάρχουν αποτελέσματα.Ίσως βρίσκεστε εκτός σύνδεσης</Text>
+        <SafeAreaView style={styles.errorContainer}>
+                  <Text>Σφάλμα. Δεν υπάρχουν αποτελέσματα.Ίσως βρίσκεστε εκτός σύνδεσης.</Text>
+                  <Text>Προσπαθήστε εκ νέου.</Text>
+                  <RefreshIcon onPress={()=>fetchAllPosts.mutateAsync()} />
         </SafeAreaView>
       )
     }
@@ -131,6 +133,10 @@ const styles = StyleSheet.create({
     borderTopColor: '#ccc',
     padding: 6
 
+  },
+  errorContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 

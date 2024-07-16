@@ -10,24 +10,37 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
+    },
+    "notification": {
+      "icon": "./assets/noticon.png",
+      "color": "#E1057A",
+      "androidMode": "default",
+      "androidCollapsedTitle": "Black Velvet",
+      "iosDisplayInForeground": true
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fifartapp.blackvelvet"
     },
     "android": {
       "package": "com.fifartapp.blackvelvet",
       "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000000"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      ["onesignal-expo-plugin",
+      {
+        "mode": "development"
+      }
+      ]
     ],
     "extra": {
       "router": {
@@ -35,7 +48,8 @@
       },
       "eas": {
         "projectId": "a7bc9b37-6c11-433d-88f0-49c87ce3c508"
-      }
+      },
+      "oneSignalAppId": "c04911cd-6e7c-496c-8c97-bec765a85c2e"
     }
   }
 }
